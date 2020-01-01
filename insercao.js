@@ -10,19 +10,19 @@ MongoClient.connect(servidor, {useUnifiedTopology: true} , (erro, client) => {
   else 
     console.log("Conexão estabelecida com sucesso.");
 
-  var topico = {
-    titulo : "Erro de compilação",
-    conteudo : "Não consigo compilar meu projeto",
-    tags : ["Java", "Android", "Mobile"]
-  };
+  var usuarios = [
+    { login: "joel", senha : "123"},
+    { login: "joao", senha : "456"},
+    { login: "maria", senha : "789"}
+  ];
 
-  var colecao = db.collection("topicos");
+  var colecao = db.collection("usuarios");
 
-  colecao.insertOne(topico, function(erro, resultado){
+  colecao.insertMany(usuarios, function(erro, resultado){
     if(erro)
-      console.log("Erro ao inserir documento: " + erro);
+      console.log("Erro ao inserir documentos: " + erro);
     else   
-      console.log("Documento inserido com sucesso");
+      console.log(resultado.insertedCount + "documentos inseridos com sucesso");
   });
  
   client.close();
